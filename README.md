@@ -9,7 +9,7 @@ This project used a GoPro Camera and a Pico Projector to calibrate the camera an
 4. This processed image is reprojected onto the orthogonal 2D plane.
 
 ## Libraries Used
-**OpenCv 3.4.0:** https://opencv.org/
+**OpenCv 3.4.0:** https://opencv.org/ <p>
 **GoProCam:** https://github.com/KonradIT/gopro-py-api
 
 ## To Do
