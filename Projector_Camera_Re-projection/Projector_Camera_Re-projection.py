@@ -106,8 +106,14 @@ while True:
     loop += 1
 
     ## if corners
-    if findCorners:       
-        proj_img = img
+    if findCorners:    
+        # Grab the processed image and reproject
+        proj_img = cv2.imread('background.jpg', 0)
+        proj_img = np.array(proj_img, dtype=np.float)
+        proj_img /= 255.0
+        a_channel = np.ones(proj_img.shape, dtype=np.float)/4.0
+        proj_img = proj_img*a_channel
+        
         # reproject the projector image from capture image 
         proj_img = proj_img[realY:realY+realH, realX:realX+realW]
         proj_w, proj_h = proj_img.shape[:2]
