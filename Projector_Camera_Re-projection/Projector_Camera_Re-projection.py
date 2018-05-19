@@ -38,7 +38,7 @@ def load_calibration_data():
 while True:
     proj_img = cv2.imread("CircleGrid_3416x1920.jpg", 0)
 
-    ## Take photo without Projection
+    ## Take photo without Projection to send to CNN for defect identification
     if initialPhoto == False:
         unProjectedImg = gpCam.take_photo(1)
         initialPhoto = True
