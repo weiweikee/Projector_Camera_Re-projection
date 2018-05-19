@@ -1,9 +1,8 @@
 # Projector_Camera_Re-projection from Normal
-Re-projecting Projector Image from Camera Image
-**Python 3.6**
-**OpenCv 3.4.0**
-**GoProCam**
-
+Re-projecting Projector Image from Camera Image <p>
+**Python 3.6** <p>
+**OpenCv 3.4.0** <p>
+**GoProCam** <p>
 
 ## Process
 This project used a GoPro Camera and a Pico Projector to calibrate the camera and projector. <p>
