@@ -108,7 +108,7 @@ while True:
     ## if corners
     if findCorners:    
         # Grab the processed image and reproject
-        proj_img = cv2.imread('background.jpg', 0)
+        proj_img = cv2.imread('ProcessingImageWoBG.jpg', 0)
         proj_img = np.array(proj_img, dtype=np.float)
         proj_img /= 255.0
         a_channel = np.ones(proj_img.shape, dtype=np.float)/4.0
