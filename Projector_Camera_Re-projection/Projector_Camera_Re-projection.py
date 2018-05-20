@@ -44,10 +44,13 @@ while True:
         unProjectedImg = gpCam.take_photo(1)
         initialPhoto = True
         h, w = unProjectedImg.shape[:2]
-    	newcameramtx, roi = cv2.getOptimalNewCameraMatrix(K, dist, (w,h), 1, (w,h))
-    	dst = cv2.undistort(unProjectedImg, K, dist, None, newcameramtx)
-    	x, y, w, h = roi
-    	unProjectedImg = dst[y:y+h, x:x+w]
+	    newcameramtx, roi = cv2.getOptimalNewCameraMatrix(K, dist, (w,h), 1, (w,h))
+	    dst = cv2.undistort(unProjectedImg, K, dist, None, newcameramtx)
+	    x, y, w, h = roi
+	    unProjectedImg = dst[y:y+h, x:x+w]
+        h, w = unProjectedImg.shape[:2]
+        ## Crop the distorted part out 
+        unProjectedImg =  unProjectedImg[300:h-300, 300:w-300]
         cv2.imwrite('Initial_Image.png', unProjectedImg)
 
     ## Show Projector Image if the corners are not found
