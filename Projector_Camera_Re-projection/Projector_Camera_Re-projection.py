@@ -37,11 +37,17 @@ def load_calibration_data():
 
 while True:
     proj_img = cv2.imread("CircleGrid_3416x1920.jpg", 0)
-
+    dist, K = load_calibration_data()
+    
     ## Take photo without Projection to send to CNN for defect identification
     if initialPhoto == False:
         unProjectedImg = gpCam.take_photo(1)
         initialPhoto = True
+        h, w = unProjectedImg.shape[:2]
+	    newcameramtx, roi = cv2.getOptimalNewCameraMatrix(K, dist, (w,h), 1, (w,h))
+	    dst = cv2.undistort(unProjectedImg, K, dist, None, newcameramtx)
+	    x, y, w, h = roi
+	    unProjectedImg = dst[y:y+h, x:x+w]
         cv2.imwrite('Initial_Image.png', unProjectedImg)
 
     ## Show Projector Image if the corners are not found
@@ -49,10 +55,7 @@ while True:
         cv2.imshow('Projector', proj_img) 
     
 
-    if camCalib == False and loop > 1:\
-
-        dist, K = load_calibration_data()
-        
+    if camCalib == False and loop > 1:     
         ## Take the picture of dotted grid
         if camCalibPic == False:
             print("Taking Picture")
@@ -107,14 +110,14 @@ while True:
     loop += 1
 
     ## if corners
-    if findCorners:    
-        # Grab the processed image and reproject
+    if findCorners:       
+    	# Grab the processed image and reproject
         proj_img = cv2.imread('ProcessingImageWoBG.jpg', 0)
         proj_img = np.array(proj_img, dtype=np.float)
         proj_img /= 255.0
         a_channel = np.ones(proj_img.shape, dtype=np.float)/4.0
         proj_img = proj_img*a_channel
-        
+
         # reproject the projector image from capture image 
         proj_img = proj_img[realY:realY+realH, realX:realX+realW]
         proj_w, proj_h = proj_img.shape[:2]
