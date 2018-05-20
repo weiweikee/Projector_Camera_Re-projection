@@ -42,6 +42,7 @@ while True:
     if initialPhoto == False:
         unProjectedImg = gpCam.take_photo(1)
         initialPhoto = True
+        cv2.imwrite('Initial_Image.png', unProjectedImg)
 
     ## Show Projector Image if the corners are not found
     if findCorners == False:
